@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:meals/models/meal.dart';
+import '../models/meal.dart';
+import '../utils/app_routes.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
-  const MealItem({super.key, required this.meal});
 
-  void _selectedMeal(BuildContext context) => Navigator.of(context).pushNamed("/meal-detail", arguments: meal).then(
-        (result) => result == null ? print("sem resutado") : print(result),
-      );
+  const MealItem(this.meal, {Key? key}) : super(key: key);
+
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(
+      AppRoutes.mealDetail,
+      arguments: meal,
+    )
+        .then((result) {
+      if (result == null) {
+        print('Sem resultado!');
+      } else {
+        print('O nome da refeição é $result.');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selectedMeal(context),
+      onTap: () => _selectMeal(context),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         elevation: 4,
         margin: const EdgeInsets.all(10),
         child: Column(
@@ -38,7 +54,10 @@ class MealItem extends StatelessWidget {
                   child: Container(
                     width: 300,
                     color: Colors.black54,
-                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 20,
+                    ),
                     child: Text(
                       meal.title,
                       style: const TextStyle(
@@ -49,7 +68,7 @@ class MealItem extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Padding(
@@ -60,33 +79,27 @@ class MealItem extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(Icons.schedule),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Text("${meal.duration} min"),
+                      const SizedBox(width: 6),
+                      Text('${meal.duration} min'),
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.work),
-                      const SizedBox(
-                        width: 6,
-                      ),
+                      const SizedBox(width: 6),
                       Text(meal.complexityText),
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.attach_money),
-                      const SizedBox(
-                        width: 6,
-                      ),
+                      const SizedBox(width: 6),
                       Text(meal.costText),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
