@@ -5,7 +5,9 @@ class MealItem extends StatelessWidget {
   final Meal meal;
   const MealItem({super.key, required this.meal});
 
-  void _selectedMeal(BuildContext context) => Navigator.of(context).pushNamed("/meal-detail", arguments: meal);
+  void _selectedMeal(BuildContext context) => Navigator.of(context).pushNamed("/meal-detail", arguments: meal).then(
+        (result) => result == null ? print("sem resutado") : print(result),
+      );
   @override
   Widget build(BuildContext context) {
     return InkWell(
