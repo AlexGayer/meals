@@ -53,4 +53,17 @@ class Meal {
         return "Desconhecida";
     }
   }
+
+  String get costText {
+    switch (cost) {
+      case Cost.cheap:
+        return "Barato";
+      case Cost.fair:
+        return "Justo";
+      case Cost.expensive:
+        return "Caro";
+      default:
+        return "Desconhecido";
+    }
+  }
 }
