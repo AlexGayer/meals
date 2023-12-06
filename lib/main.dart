@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/screens/meal_detail_screen.dart';
-import 'screens/categories_screen.dart';
+import 'package:meals/screens/tabs_scren.dart';
 import 'screens/categories_meals_screen.dart';
 import 'utils/app_routes.dart';
 
@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Vamos Cozinhar?',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: false,
         colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       routes: {
-        AppRoutes.home: (ctx) => const CategoriesScreen(),
+        AppRoutes.home: (ctx) => const TabsScreen(),
         AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen(),
         AppRoutes.mealDetail: (ctx) => const MealDetail(),
       },
